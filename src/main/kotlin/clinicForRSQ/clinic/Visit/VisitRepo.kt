@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface VisitRepo: CrudRepository<Visit, Long> {
-    fun findByVisitId(id : Long) : Visit
-    fun deleteByVisitId(id: Long) : Visit
+    fun findVisitById(id : Long) : Visit
+    fun deleteVisitById(id: Long) : Visit
 }

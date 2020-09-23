@@ -23,7 +23,7 @@ class DoctorController(private val repo : DoctorRepo)
         repo.save(doctor)
     }
     @DeleteMapping("doctor/{id}")
-    fun deleteDoctorById(@PathVariable("id") id : Long) = repo.deleteByDoctorId(id);
+    fun deleteDoctorById(@PathVariable("id") id : Long) = repo.deleteDoctorById(id);
 
 
 }

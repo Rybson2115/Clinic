@@ -1,13 +1,12 @@
 package clinicForRSQ.clinic.Patient
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
+
 
 @Entity
 class Patient (
-      @Id @GeneratedValue private var id: Long,
-      private var name: String,
-      private var surname: String,
-      private var address: String
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) private var id: Long,
+        private var name: String,
+        private var surname: String,
+        private var address: String
 )

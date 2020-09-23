@@ -15,12 +15,12 @@ class VisitController (val repo : VisitRepo){
     fun getAllVisits() = repo.findAll().toList();
 
     @GetMapping("visit/find?{id}")
-    fun getVisitByPatientId(@PathVariable("id") id : Long) = repo.findByVisitId(id);
+    fun getVisitByPatientId(@PathVariable("id") id : Long) = repo.findVisitById(id);
 
     @PutMapping("/visit")
     fun putVisit (@RequestBody visit : Visit){
         repo.save(visit)
     }
     @DeleteMapping("visit/delete?{id}")
-    fun deleteVisitById(@PathVariable("id") id : Long) = repo.deleteByVisitId(id);
+    fun deleteVisitById(@PathVariable("id") id : Long) = repo.deleteVisitById(id);
 }

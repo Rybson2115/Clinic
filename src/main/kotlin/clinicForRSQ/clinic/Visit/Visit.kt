@@ -6,11 +6,12 @@ import javax.persistence.*
 
 @Entity
 class Visit (
-        @Id @GeneratedValue private var id: Long,
+        @Id @GeneratedValue(strategy = GenerationType.AUTO) private var id: Long,
         private var room: Int =0,
-        /*@ManyToOne @JoinColumn */private var patientId: Long, /*It work? Reference? */
-        /*@ManyToOne @JoinColumn */private var doctorId: Long,
+        private var patientId: Long,
+        private var doctorId: Long,
         private var date: LocalDate,
         private var time: LocalTime
+
 
 )

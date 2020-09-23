@@ -22,5 +22,5 @@ class PatientController(val repo : PatientRepo)
         repo.save(patient)
     }
     @DeleteMapping("patient/{id}")
-    fun deletePatientById(@PathVariable("id") id : Long) = repo.deleteByPatientId(id);
+    fun deletePatientById(@PathVariable("id") id : Long) = repo.deletePatientById(id);
 }
