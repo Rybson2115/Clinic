@@ -9,7 +9,7 @@ class Patient (
         @Id @GeneratedValue /*@OneToMany(mappedBy = "Patient")*/ var id: Long,
         var name: String,
         var surname: String,
-        var address: String,
+        var address: String
 
-        @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient") private var visits: List<Visit>? = null
+
 )

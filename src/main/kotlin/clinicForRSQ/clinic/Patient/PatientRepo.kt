@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PatientRepo : CrudRepository<Patient, Long>
 {
-    fun deletePatientById(id : Long) : Patient
+
 }

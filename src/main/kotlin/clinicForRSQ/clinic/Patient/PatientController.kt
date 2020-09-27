@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.*
 class PatientController(val repo : PatientRepo)
 {
     @PostMapping("/patient")
-    fun addPatient (@RequestBody patient : Patient)
-    {
-        repo.save(patient)
-    }
+    fun addPatient (@RequestBody patient : Patient) = PatientService.TryAddPatient(patient)
+
 
     @GetMapping("/patient")
     fun getAllPatients() = repo.findAll().toList();
@@ -21,6 +19,6 @@ class PatientController(val repo : PatientRepo)
     fun putPatient (@RequestBody patient : Patient){
         repo.save(patient)
     }
-    @DeleteMapping("patient/{id}")
-    fun deletePatientById(@PathVariable("id") id : Long) = repo.deletePatientById(id);
+    @DeleteMapping("/patient/{id}")
+    fun deletePatientById(@PathVariable("id") id : Long) = repo.deleteById(id);
 }

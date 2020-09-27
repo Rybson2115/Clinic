@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class VisitController (val repo : VisitRepo){
     @PostMapping("/visit")
-    fun addVisit (@RequestBody visit : Visit)
-    {
-        repo.save(visit)
-    }
+    fun addVisit (@RequestBody visit : Visit)=repo.save(visit)
+
     @GetMapping("/visit")
     fun getAllVisits() = repo.findAll().toList();
 
@@ -21,6 +19,6 @@ class VisitController (val repo : VisitRepo){
     fun putVisit (@RequestBody visit : Visit){
         repo.save(visit)
     }
-    @DeleteMapping("visit/delete?{id}")
-    fun deleteVisitById(@PathVariable("id") id : Long) = repo.deleteVisitById(id);
+    @DeleteMapping("visit/delete/{id}")
+    fun deleteVisitById(@PathVariable("id") id : Long) = repo.deleteById(id);
 }
