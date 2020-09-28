@@ -10,10 +10,10 @@ import javax.persistence.*
 class Visit (
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long,
         var room: Int =0,
-        @ManyToOne @JoinColumn(name = "Patient",referencedColumnName = "id") var patient : Patient,
-        @ManyToOne @JoinColumn(name = "Doctor", referencedColumnName = "id") var doctor: Doctor
-        /*var date: LocalDate,
-        var time: LocalTime  */
+        @ManyToOne @JoinColumn(name = "patientId",referencedColumnName = "id") var patient : Patient,
+        @ManyToOne @JoinColumn(name = "doctorId", referencedColumnName = "id") var doctor: Doctor,
+        var date: LocalDate,
+        var time: LocalTime
 
 
 )
