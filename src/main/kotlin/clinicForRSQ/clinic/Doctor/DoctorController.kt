@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.*
 class DoctorController(val service : DoctorService)
 {
     @PostMapping("/doctor")
-    fun addDoctor (@RequestBody doctor : Doctor) = service.TryAddDoctor(doctor)
+    fun addDoctor (@RequestBody doctor : Doctor) = service.tryAddDoctor(doctor)
 
     @GetMapping("/doctor")
-    fun getAllDoctors() = service.TryGetAllDoctors()
+    fun getAllDoctors() = service.tryGetAllDoctors()
 
     @PutMapping("/doctor")
-    fun putDoctor (@RequestBody doctor : Doctor) = service.TryPutDoctor(doctor)
+    fun putDoctor (@RequestBody doctor : Doctor) = service.tryPutDoctor(doctor)
 
     @DeleteMapping("doctor/{id}")
-    fun deleteDoctorById(@PathVariable("id") id : Long) = service.TryDeleteDoctor(id);
+    fun deleteDoctorById(@PathVariable("id") id : Long) = service.tryDeleteDoctor(id);
 
 
 }

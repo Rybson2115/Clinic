@@ -11,17 +11,17 @@ class VisitController (val service : VisitService){
     fun addVisit (@RequestBody visit : Visit)= service.TryAddVisit(visit)
 
     @GetMapping("/visit")
-    fun getAllVisits() = service.TryGetAllVistis()
+    fun getAllVisits() = service.tryGetAllVistis()
 
     @GetMapping("visit/find/patient/{patient}")
-    fun getVisitByPatientId(@PathVariable("patient") patient: Patient) = service.TryFindPatientVisits(patient);
-
+    fun getVisitByPatientId(@PathVariable("patient") patientId: Long) = service.tryFindPatientVisits(patientId);
     @GetMapping("visit/find/doctor/{doctor}")
-    fun getVisitByDoctorId(@PathVariable("doctor") doctor: Doctor) = service.TryFindDoctorVisits(doctor);
+    fun getVisitByDoctorId(@PathVariable("doctor") doctorId: Long) = service.tryFindDoctorVisits(doctorId);
+
 
     @PutMapping("/visit")
-    fun putVisit (@RequestBody visit : Visit) = service.TryPutVisit(visit)
+    fun putVisit (@RequestBody visit : Visit) = service.tryPutVisit(visit)
 
     @DeleteMapping("visit/delete/{id}")
-    fun deleteVisitById(@PathVariable("id") id : Long) = service.TryDeleteVisit(id);
+    fun deleteVisitById(@PathVariable("id") id : Long) = service.tryDeleteVisit(id);
 }

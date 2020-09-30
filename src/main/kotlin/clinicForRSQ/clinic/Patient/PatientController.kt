@@ -6,19 +6,14 @@ import org.springframework.web.bind.annotation.*
 class PatientController(val service: PatientService)
 {
     @PostMapping("/patient")
-    fun addPatient (@RequestBody patient : Patient) = service.TryAddPatient(patient)
-
+    fun addPatient (@RequestBody patient : Patient) = service.tryAddPatient(patient)
 
     @GetMapping("/patient")
-    fun getAllPatients() = service.TryGetAllPatients()
+    fun getAllPatients() = service.tryGetAllPatients()
 
-    /*@GetMapping("patient/{surname}")
-    fun getPatientBySurname(@PathVariable("surname") surname : String) = repo.findBySurname(surname);
-    No required */
     @PutMapping("/patient")
-    fun putPatient (@RequestBody patient : Patient){
-        service.TryPutPatient(patient)
-    }
+    fun putPatient (@RequestBody patient : Patient) = service.tryPutPatient(patient)
+
     @DeleteMapping("/patient/{id}")
-    fun deletePatientById(@PathVariable("id") id : Long) = service.TryDeletePatient(id)
+    fun deletePatientById(@PathVariable("id") id : Long) = service.tryDeletePatient(id)
 }

@@ -8,7 +8,7 @@ import javax.persistence.*
 
 @Entity
 class Visit (
-        @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long,
+        @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) var id: Long,
         var room: Int =0,
         @ManyToOne @JoinColumn(name = "patientId",referencedColumnName = "id") var patient : Patient,
         @ManyToOne @JoinColumn(name = "doctorId", referencedColumnName = "id") var doctor: Doctor,
