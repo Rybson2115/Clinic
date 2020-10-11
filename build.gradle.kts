@@ -23,10 +23,13 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    implementation("junit:junit:4.12")
     runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+	testImplementation(kotlin("test-js"))
+
 }
 
 tasks.withType<Test> {

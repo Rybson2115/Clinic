@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class VisitController (val service : VisitService){
     @PostMapping("/visit")
-    fun addVisit (@RequestBody visit : Visit)= service.TryAddVisit(visit)
+    fun addVisit (@RequestBody visit : Visit)= service.tryAddVisit(visit)
 
     @GetMapping("/visit")
     fun getAllVisits() = service.tryGetAllVistis()
