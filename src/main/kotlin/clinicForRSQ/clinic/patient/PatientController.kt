@@ -1,10 +1,10 @@
-package clinicForRSQ.clinic.Patient
+package clinicForRSQ.clinic.patient
 
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class PatientController(val service: PatientService)
-{
+class PatientController(val service: PatientService){
+
     @PostMapping("/patient")
     fun addPatient (@RequestBody patient : Patient) = service.tryAddPatient(patient)
 

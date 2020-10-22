@@ -1,7 +1,7 @@
-package clinicForRSQ.clinic.Visit
+package clinicForRSQ.clinic.visit
 
-import clinicForRSQ.clinic.Doctor.Doctor
-import clinicForRSQ.clinic.Patient.Patient
+import clinicForRSQ.clinic.doctor.Doctor
+import clinicForRSQ.clinic.patient.Patient
 import java.time.LocalDate
 import java.time.LocalTime
 import javax.persistence.*
@@ -14,6 +14,4 @@ class Visit(
         @ManyToOne @JoinColumn(name = "doctorId", referencedColumnName = "id") var doctor: Doctor,
         var date: LocalDate,
         var time: LocalTime
-
-
 )

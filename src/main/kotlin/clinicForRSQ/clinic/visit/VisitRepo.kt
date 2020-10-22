@@ -1,5 +1,4 @@
-package clinicForRSQ.clinic.Visit
-
+package clinicForRSQ.clinic.visit
 
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
@@ -12,6 +11,5 @@ interface VisitRepo: CrudRepository<Visit, Long> {
     fun findPatientVisitById(patient: Long): List<Visit>
 
     @Query("select v from Visit v where v.doctor.id = ?1")
-    fun findDoctortVisitById(doctor: Long): List<Visit>
-
+    fun findDoctorVisitById(doctor: Long): List<Visit>
 }

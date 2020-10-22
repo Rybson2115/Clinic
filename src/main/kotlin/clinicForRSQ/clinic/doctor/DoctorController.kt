@@ -1,10 +1,10 @@
-package clinicForRSQ.clinic.Doctor
+package clinicForRSQ.clinic.doctor
 
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class DoctorController(val service : DoctorService)
-{
+class DoctorController(val service : DoctorService) {
+
     @PostMapping("/doctor")
     fun addDoctor (@RequestBody doctor : Doctor) = service.tryAddDoctor(doctor)
 
@@ -15,7 +15,5 @@ class DoctorController(val service : DoctorService)
     fun putDoctor (@RequestBody doctor : Doctor) = service.tryPutDoctor(doctor)
 
     @DeleteMapping("doctor/{id}")
-    fun deleteDoctorById(@PathVariable("id") id : Long) = service.tryDeleteDoctor(id);
-
-
+    fun deleteDoctorById(@PathVariable("id") id : Long) = service.tryDeleteDoctor(id)
 }

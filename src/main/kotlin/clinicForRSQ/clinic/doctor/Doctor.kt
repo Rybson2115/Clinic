@@ -1,4 +1,4 @@
-package clinicForRSQ.clinic.Doctor
+package clinicForRSQ.clinic.doctor
 
 import javax.persistence.*
 
@@ -8,5 +8,4 @@ class Doctor (
         var name: String,
         var surname: String,
         @Enumerated(EnumType.STRING) var specialization: DoctorSpecialization
-
 )

@@ -37,7 +37,7 @@ localhost:8080/doctor -> PUT
 "id": id,
 "name": "{name}",
 "surname": "{surname}",
-"specialization": {0-5}
+"specialization": {0-4}
 
 How to delete doctor?
 localhost:8080/doctor/{id} -> DELETE
@@ -60,7 +60,7 @@ localhost:8080/visit -> POST
          	 "id": id,
 		"name": "{name}",
 		"surname": "{surname}",
-		"specialization": {0-5}
+		"specialization": {0-4}
         },
         "date": "{date}",
         "time": "{time}"
@@ -84,7 +84,7 @@ localhost:8080/visit -> PUT
          	 "id": id,
 		"name": "{name}",
 		"surname": "{surname}",
-		"specialization": {0-5}
+		"specialization": {0-4}
         },
         "date": "{date}",
         "time": "{time}"
