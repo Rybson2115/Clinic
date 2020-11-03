@@ -8,4 +8,13 @@ class Doctor (
         var name: String,
         var surname: String,
         @Enumerated(EnumType.STRING) var specialization: DoctorSpecialization
+
 )
+
+enum class DoctorSpecialization{
+    DENTIST,
+    PHYSIOTHERAPIST,
+    INTERNIST,
+    ALLERGIST,
+    CARDIOLOGIST
+}

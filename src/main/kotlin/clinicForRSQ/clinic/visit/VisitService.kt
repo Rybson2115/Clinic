@@ -5,10 +5,10 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 @Service
-class VisitService (var repo : VisitRepo){
+class VisitService (var repo : VisitRepo) {
 
-    fun tryAddVisit(visit: Visit){
-        if(checkDateAndTime(visit.date,visit.time)) {
+    fun tryAddVisit(visit: Visit) {
+        if (checkDateAndTime(visit.date, visit.time)) {
             repo.save(visit)
         }
     }
@@ -17,35 +17,42 @@ class VisitService (var repo : VisitRepo){
 
     fun tryPutVisit(visit: Visit) = repo.save(visit)
 
-    fun tryDeleteVisit(id: Long) = repo.deleteById(id)
+    fun tryDeleteVisit(id: Long){
+        if(repo.existsById(id))
+            repo.deleteById(id)
+        else
+            throw Exception("Visit no exists!")
+    }
 
     fun tryFindDoctorVisits(doctorId: Long) = repo.findDoctorVisitById(doctorId)
 
     fun tryFindPatientVisits(patientId: Long) = repo.findPatientVisitById(patientId)
 
-    fun tryDeleteVisits(visits : List<Visit>) = repo.deleteAll(visits)
+    fun tryDeleteVisits(visits: List<Visit>) = repo.deleteAll(visits)
 
-    fun checkDateAndTime(visitDate: LocalDate, visitTime: LocalTime):Boolean{
-        var closeTime : LocalTime = LocalTime.of(17,46,0) //last visit may start at 17:45,  clinic works until 18
-        var openTime : LocalTime = LocalTime.of(7,59,59) //first visit may start at 8:00
-        var currentTime: LocalTime = LocalTime.now()
-        val currentDate : LocalDate = LocalDate.now()
-        if(visitDate.isEqual(currentDate)){
-            if(currentTime.isAfter(visitTime) && visitTime.isBefore(closeTime))
+    fun checkDateAndTime(visitDate: LocalDate, visitTime: LocalTime): Boolean {
+
+        val lastVisitTime: LocalTime = LocalTime.of(17, 46, 0)
+        val firstVisitTime: LocalTime = LocalTime.of(7, 59, 59)
+        val currentTime: LocalTime = LocalTime.now()
+        val currentDate: LocalDate = LocalDate.now()
+
+        if (visitDate.isEqual(currentDate)) {
+            if (visitTime.isAfter(currentTime) && visitTime.isBefore(lastVisitTime))
                 return true
-            else{
-               throw Exception("Wrong time!")
-                return false
-            }}
-        else if(visitDate.isAfter(currentDate)){
-            if(openTime.isAfter(visitTime) && visitTime.isBefore(visitTime))
-                return true
-            else{
+            else {
                 throw Exception("Wrong time!")
-                return false
-            }}
+            }
+        }
+        else if (visitDate.isAfter(currentDate)) {
+            if (visitTime.isAfter(firstVisitTime) && visitTime.isBefore(lastVisitTime)) {
+                return true
+            }
+            else {
+                throw Exception("Wrong time!")
+        }
+        }
         else
-            throw Exception("Wrong date!")
-        return false
+        throw Exception("Wrong date!")
     }
 }
