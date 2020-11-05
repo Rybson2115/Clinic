@@ -1,8 +1,12 @@
 package clinicForRSQ.clinic.doctor.dto
 
+import clinicForRSQ.clinic.doctor.DoctorSpecialization
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+
 class DoctorDTO (
     var id: Long,
     var name: String,
     var surname: String,
-    var specialization: String
+    @Enumerated(EnumType.STRING) var specialization: DoctorSpecialization
 )
