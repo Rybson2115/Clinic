@@ -19,8 +19,8 @@ class Visit(
     constructor(visitDTO: VisitDTO) : this (
             id = visitDTO.id,
             room = visitDTO.room,
-            patient = visitDTO.patient.toPatient(),
-            doctor = visitDTO.doctor.toDoctor(),
+            patient = Patient(visitDTO.patient),
+            doctor = Doctor(visitDTO.doctor),
             date = visitDTO.date,
             time = visitDTO.time
     )

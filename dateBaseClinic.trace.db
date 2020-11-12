@@ -2076,3 +2076,11 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/Ryb
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 46 more
+2020-11-12 12:30:23 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT * FROM DOCTOR PATIENT VISIT[*]"
+Syntax error in SQL statement "SELECT * FROM DOCTOR PATIENT VISIT[*]"; SQL statement:
+SELECT * FROM DOCTOR PATIENT VISIT [42000-200]
+2020-11-12 12:30:32 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT * FROM,[*] DOCTOR, PATIEN,\T, VISIT"; oczekiwano "identifier"
+Syntax error in SQL statement "SELECT * FROM,[*] DOCTOR, PATIEN,\T, VISIT"; expected "identifier"; SQL statement:
+SELECT * FROM, DOCTOR, PATIEN,\T, VISIT [42001-200]

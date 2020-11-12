@@ -8,11 +8,4 @@ class PatientDTO (
         var name: String,
         var surname: String,
         var address: String
-){
-    fun toPatient() = Patient (
-            id = id,
-            name = name,
-            surname = surname,
-            address = address
-    )
-}
+)

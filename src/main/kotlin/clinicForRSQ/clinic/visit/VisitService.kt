@@ -1,5 +1,6 @@
 package clinicForRSQ.clinic.visit
 
+import clinicForRSQ.clinic.visit.dto.VisitDTO
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.time.LocalTime
@@ -7,15 +8,19 @@ import java.time.LocalTime
 @Service
 class VisitService (var repo : VisitRepo) {
 
-    fun tryAddVisit(visit: Visit) {
-        if (checkDateAndTime(visit.date, visit.time)) {
-            repo.save(visit)
+    fun tryAddVisit(visitDTO: VisitDTO)  {
+        if (checkDateAndTime(visitDTO.date, visitDTO.time)) {
+            val visit : Visit = Visit(visitDTO)
+            repo.save(visit).toVisitDTO()
         }
     }
 
     fun tryGetAllVisits() = repo.findAll().toList()
 
-    fun tryPutVisit(visit: Visit) = repo.save(visit)
+    fun tryPutVisit(visitDTO: VisitDTO) {
+        val visit : Visit = Visit(visitDTO)
+        repo.save(visit).toVisitDTO()
+    }
 
     fun tryDeleteVisit(id: Long){
         if(repo.existsById(id))

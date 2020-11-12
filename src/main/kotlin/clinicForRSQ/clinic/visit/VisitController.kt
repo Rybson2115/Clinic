@@ -1,12 +1,13 @@
 package clinicForRSQ.clinic.visit
 
+import clinicForRSQ.clinic.visit.dto.VisitDTO
 import org.springframework.web.bind.annotation.*
 
 @RestController
 class VisitController (val service : VisitService){
 
     @PostMapping("/visit")
-    fun addVisit (@RequestBody visit : Visit)= service.tryAddVisit(visit)
+    fun addVisit (@RequestBody visit : VisitDTO) = service.tryAddVisit(visit)
 
     @GetMapping("/visit")
     fun getAllVisits() = service.tryGetAllVisits()
@@ -18,7 +19,7 @@ class VisitController (val service : VisitService){
     fun getVisitByDoctorId(@PathVariable("doctor") doctorId: Long) = service.tryFindDoctorVisits(doctorId);
 
     @PutMapping("/visit")
-    fun putVisit (@RequestBody visit : Visit) = service.tryPutVisit(visit)
+    fun putVisit (@RequestBody visit : VisitDTO) = service.tryPutVisit(visit)
 
     @DeleteMapping("visit/delete/{id}")
     fun deleteVisitById(@PathVariable("id") id : Long) = service.tryDeleteVisit(id);

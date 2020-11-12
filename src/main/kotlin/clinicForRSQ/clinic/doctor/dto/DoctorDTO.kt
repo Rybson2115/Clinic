@@ -10,14 +10,7 @@ class DoctorDTO (
     var name: String,
     var surname: String,
     @Enumerated(EnumType.STRING) var specialization: DoctorSpecializationDTO
-){
-    fun toDoctor() = Doctor(
-            id = id,
-            name = name,
-            surname = surname,
-            specialization = specialization.toDoctorSpecialization()
-    )
-}
+)
 enum class DoctorSpecializationDTO{
     DENTIST,
     PHYSIOTHERAPIST,
