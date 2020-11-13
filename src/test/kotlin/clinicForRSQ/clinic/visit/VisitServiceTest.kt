@@ -23,9 +23,10 @@ class VisitServiceTest {
     fun checkDateTimeNowTestTrue() {//current date, correct time, expected result = true, test runs between 8 and 17:45
         //given
         val goodTime: LocalTime = LocalTime.of(17,45,0,0)
+        val goodRealTime : LocalTime = LocalTime.of(9,0,0,0)
         //when & then
         val expected = true
-        val visitServiceTest : Boolean = visitService.checkDateAndTime(currentDate,goodTime)
+        val visitServiceTest : Boolean = visitService.checkDateAndTime(currentDate,goodTime,goodRealTime)
         //then
         assertEquals(expected, visitServiceTest )
     }
