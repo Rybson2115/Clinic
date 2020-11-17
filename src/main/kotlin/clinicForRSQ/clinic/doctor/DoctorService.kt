@@ -20,8 +20,12 @@ class DoctorService (val repo : DoctorRepo, val visitService: VisitService){
         return repo.save(doctor).toDoctorDTO()
     }
     fun tryDeleteDoctor(id: Long) {
-    var deleteVisits: List<Visit> = visitService.tryFindPatientVisits(id)
-    visitService.tryDeleteVisits(deleteVisits)
-    repo.deleteById(id)
+        if(repo.existsById(id)){
+            val deleteVisits: List<Visit> = visitService.tryFindPatientVisits(id)
+            visitService.tryDeleteVisits(deleteVisits)
+            repo.deleteById(id)
+        }
+        else
+            throw Exception("Doctor no exists!")
     }
 }

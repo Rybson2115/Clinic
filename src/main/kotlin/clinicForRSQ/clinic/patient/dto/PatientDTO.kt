@@ -7,5 +7,6 @@ class PatientDTO (
         var id: Long,
         var name: String,
         var surname: String,
+        var pesel: String,
         var address: String
 )

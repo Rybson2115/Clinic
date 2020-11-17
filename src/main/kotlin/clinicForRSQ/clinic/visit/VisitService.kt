@@ -35,11 +35,10 @@ class VisitService (var repo : VisitRepo) {
 
     fun tryDeleteVisits(visits: List<Visit>) = repo.deleteAll(visits)
 
-    fun checkDateAndTime(visitDate: LocalDate, visitTime: LocalTime, currentTOme : LocalTime = LocalTime.now()): Boolean {
+    fun checkDateAndTime(visitDate: LocalDate, visitTime: LocalTime, currentTime : LocalTime = LocalTime.now()): Boolean {
 
         val lastVisitTime: LocalTime = LocalTime.of(17, 46, 0)
         val firstVisitTime: LocalTime = LocalTime.of(7, 59, 59)
-        val currentTime: LocalTime = LocalTime.now()
         val currentDate: LocalDate = LocalDate.now()
 
         if (visitDate.isEqual(currentDate)) {
