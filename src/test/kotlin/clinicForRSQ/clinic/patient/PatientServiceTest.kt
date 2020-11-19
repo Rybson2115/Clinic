@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import java.time.LocalTime
 
 @RunWith(MockitoJUnitRunner::class)
 class PatientServiceTest {
@@ -22,10 +21,10 @@ class PatientServiceTest {
     @Test
     fun deletePatientByBadIdExceptException(){
         //given
-        val badId : Long = -1
+        val incorrectId : Long = -1
         //when & then
         val exception = assertThrows(Exception::class.java) {
-            patientService.tryDeletePatient(badId)
+            patientService.tryDeletePatient(incorrectId)
         }
         assertEquals("Patient no exists!", exception.message)
     }
@@ -33,10 +32,10 @@ class PatientServiceTest {
     @Test
     fun checkPeselTestgoodPesel(){
         //given
-        val goodPesel : String = "98061503475"
+        val correctPesel : String = "98061503475"
         //when & then
-        val expected = true
-        val visitServiceTest : Boolean = patientService.checkPesel(goodPesel)
+        val expected = kotlin.Unit
+        val visitServiceTest  = patientService.checkPesel(correctPesel)
         //then
         assertEquals(expected, visitServiceTest)
     }
@@ -49,7 +48,7 @@ class PatientServiceTest {
         val exception = assertThrows(Exception::class.java) {
             patientService.checkPesel(shortPesel)
         }
-        assertEquals("Incorrect pesel!", exception.message)
+        assertEquals("Incorrect lenght pesel!", exception.message)
     }
 
     @Test
@@ -60,7 +59,7 @@ class PatientServiceTest {
         val exception = assertThrows(Exception::class.java) {
             patientService.checkPesel(longPesel)
         }
-        assertEquals("Incorrect pesel!", exception.message)
+        assertEquals("Incorrect lenght pesel!", exception.message)
     }
 
     @Test
@@ -71,18 +70,37 @@ class PatientServiceTest {
         val exception = assertThrows(Exception::class.java) {
             patientService.checkPesel(letterPesel)
         }
-        assertEquals("Incorrect pesel!", exception.message)
+        assertEquals("Letters in pesel!", exception.message)
     }
 
     @Test
     fun checkPeselTestBadPesel(){
         //given
-        val badPesel : String = "12345678999"
+        val incorrectPesel : String = "12345678999"
         //when & then
         val exception = assertThrows(Exception::class.java) {
-            patientService.checkPesel(badPesel)
+            patientService.checkPesel(incorrectPesel)
         }
         assertEquals("Incorrect pesel!", exception.message)
     }
-    
+    @Test
+    fun checkPeselTestZeroPesel(){
+        //given
+        val zeroPesel : String = "00000000000"
+        //when & then
+        val exception = assertThrows(Exception::class.java) {
+            patientService.checkPesel(zeroPesel)
+        }
+        assertEquals("Incorrect pesel!", exception.message)
+    }
+    @Test
+    fun checkPeselTestIncorectPesel(){
+        //given
+        val incorrectPesel : String = "12345678900"
+        //when & then
+        val exception = assertThrows(Exception::class.java) {
+            patientService.checkPesel(incorrectPesel)
+        }
+        assertEquals("Incorrect pesel!", exception.message)
+    }
 }

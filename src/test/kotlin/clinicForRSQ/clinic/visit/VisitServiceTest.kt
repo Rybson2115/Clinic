@@ -26,7 +26,10 @@ class VisitServiceTest {
         val goodRealTime : LocalTime = LocalTime.of(9,0,0,0)
         //when & then
         val expected = true
-        val visitServiceTest : Boolean = visitService.checkDateAndTime(currentDate,goodTime,goodRealTime)
+        val visitServiceTest : Boolean = visitService.checkDateAndTime(
+                currentDate,
+                goodTime,
+                goodRealTime)
         //then
         assertEquals(expected, visitServiceTest )
     }
