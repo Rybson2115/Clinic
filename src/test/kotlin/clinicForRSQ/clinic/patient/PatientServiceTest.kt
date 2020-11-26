@@ -1,6 +1,7 @@
 package clinicForRSQ.clinic.patient
 
 
+import clinicForRSQ.clinic.patient.dto.PatientDTO
 import clinicForRSQ.clinic.visit.VisitRepo
 import clinicForRSQ.clinic.visit.VisitService
 import com.nhaarman.mockitokotlin2.mock
@@ -102,5 +103,27 @@ class PatientServiceTest {
             patientService.checkPesel(incorrectPesel)
         }
         assertEquals("Incorrect pesel!", exception.message)
+    }
+
+    @Test
+    fun putPatientTestincorrectId(){
+        //given
+        val incorrectIdPatientDTO : PatientDTO = PatientDTO(-1,"","","","")
+        //when & then
+        val exception = assertThrows(Exception::class.java) {
+            patientService.tryPutPatient(incorrectIdPatientDTO)
+        }
+        assertEquals("Patient no exists!", exception.message)
+    }
+
+    @Test
+    fun putPatientTestEmptyPatient(){
+        //given
+        val emptyPatientDTO : PatientDTO = PatientDTO(0,"","","","") //dodac pacjenta o id=0
+        //when & then
+        val exception = assertThrows(Exception::class.java) {
+            patientService.tryPutPatient(emptyPatientDTO)
+        }
+        assertEquals("No data for editing!", exception.message)
     }
 }

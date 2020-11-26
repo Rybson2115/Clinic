@@ -37,10 +37,11 @@ class VisitServiceTest {
     @Test
     fun checkDateTimeNowTestFalse() { //current date, incorrect time, expected result = exception - Wrong time!
         //given
-        val badTime: LocalTime = LocalTime.of(7,0,0,0)
+        val incorrectTime: LocalTime = LocalTime.of(7,0,0,0)
         //when & then
         val exception = assertThrows(Exception::class.java) {
-            visitService.checkDateAndTime(currentDate,badTime)
+            visitService.checkDateAndTime(visitDate = currentDate,
+                    visitTime =  incorrectTime)
         }
         assertEquals("Wrong time!", exception.message)
     }
@@ -48,11 +49,12 @@ class VisitServiceTest {
     @Test
     fun checkDateTimeTestTrue() { //correct date, correct time, expected result = true
         //given
-        val goodDate: LocalDate = LocalDate.of(currentDate.year+1,1,1)
-        val goodTime: LocalTime = LocalTime.of(12,0,0,0)
+        val correctDate: LocalDate = LocalDate.of(currentDate.year+1,1,1)
+        val correctTime: LocalTime = LocalTime.of(12,0,0,0)
         //when & then
         val expected = true
-        val visitServiceTest : Boolean = visitService.checkDateAndTime(goodDate,goodTime)
+        val visitServiceTest : Boolean = visitService.checkDateAndTime(visitDate = correctDate,
+                visitTime = correctTime)
         //then
         assertEquals(expected, visitServiceTest )
     }

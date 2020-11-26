@@ -2,14 +2,41 @@ package clinicForRSQ.clinic.visit
 
 import clinicForRSQ.clinic.visit.dto.VisitDTO
 import org.springframework.stereotype.Service
+import java.lang.Math.abs
+import java.sql.Time
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 
 @Service
 class VisitService (var repo : VisitRepo) {
 
     fun tryAddVisit(visitDTO: VisitDTO)  {
-        if (checkDateAndTime(visitDTO.date, visitDTO.time)) {
+        if (checkDateAndTime(visitDate = visitDTO.date, visitTime = visitDTO.time)) {
+            val doctorVisits: List<Visit> = repo.findDoctorVisitById(visitDTO.doctor.id).toList()
+            for(visit in doctorVisits){
+                val oldVisitDTO: VisitDTO = visit.toVisitDTO()
+                if(oldVisitDTO.date.isEqual(visitDTO.date)){
+                        if(oldVisitDTO.time.hour == visitDTO.time.hour){
+                            val minuteDifference: Int = oldVisitDTO.time.minute - visitDTO.time.minute
+                                if (abs(minuteDifference)<5) {
+                                    throw Exception("Change date or time!")
+                                }
+                        }
+                }
+            }
+            val patientVisits: List<Visit> = repo.findPatientVisitById(visitDTO.patient.id).toList()
+            for(visit in patientVisits){
+                val oldVisitDTO: VisitDTO = visit.toVisitDTO()
+                if(oldVisitDTO.date.isEqual(visitDTO.date)){
+                    if(oldVisitDTO.time.hour == visitDTO.time.hour){
+                        val minuteDifference: Int = oldVisitDTO.time.minute - visitDTO.time.minute
+                        if (abs(minuteDifference)>=5) {
+                            throw Exception("Change date or time!")
+                        }
+                    }
+                }
+            }
             val visit : Visit = Visit(visitDTO)
             repo.save(visit).toVisitDTO()
         }
@@ -35,7 +62,9 @@ class VisitService (var repo : VisitRepo) {
 
     fun tryDeleteVisits(visits: List<Visit>) = repo.deleteAll(visits)
 
-    fun checkDateAndTime(visitDate: LocalDate, visitTime: LocalTime, currentTime : LocalTime = LocalTime.now()): Boolean {
+    fun checkDateAndTime(visitDate: LocalDate,
+                         visitTime: LocalTime,
+                         currentTime : LocalTime = LocalTime.now()): Boolean {
 
         val lastVisitTime: LocalTime = LocalTime.of(17, 46, 0)
         val firstVisitTime: LocalTime = LocalTime.of(7, 59, 59)

@@ -20,10 +20,10 @@ class DoctorServiceTest {
     @Test
     fun tryDeleteDoctorByBadIdExpectException() {
         //given
-        val badId : Long = -1
+        val incorrectId : Long = -1
         //when & then
         val exception = assertThrows(Exception::class.java) {
-           doctorService.tryDeleteDoctor(badId)
+           doctorService.tryDeleteDoctor(incorrectId)
         }
         assertEquals("Doctor no exists!", exception.message)
     }
