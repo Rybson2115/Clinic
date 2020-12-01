@@ -1,15 +1,16 @@
 package clinicForRSQ.clinic.patient
 
 import clinicForRSQ.clinic.patient.dto.PatientDTO
+import com.sun.istack.NotNull
 import javax.persistence.*
 
 @Entity
 class Patient (
         @Id @GeneratedValue var id: Long,
-        var name: String,
-        var surname: String,
-        var pesel: String,
-        var address: String
+        @NotNull var name: String,
+        @NotNull var surname: String,
+        @NotNull var pesel: String,
+        @NotNull var address: String
 ){
     constructor(patientDTO: PatientDTO) : this (
             id = patientDTO.id,

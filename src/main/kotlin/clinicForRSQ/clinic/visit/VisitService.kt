@@ -19,7 +19,7 @@ class VisitService (var repo : VisitRepo) {
                 if(oldVisitDTO.date.isEqual(visitDTO.date)){
                         if(oldVisitDTO.time.hour == visitDTO.time.hour){
                             val minuteDifference: Int = oldVisitDTO.time.minute - visitDTO.time.minute
-                                if (abs(minuteDifference)<5) {
+                                if (abs(minuteDifference)<4) {
                                     throw Exception("Change date or time!")
                                 }
                         }
@@ -31,7 +31,7 @@ class VisitService (var repo : VisitRepo) {
                 if(oldVisitDTO.date.isEqual(visitDTO.date)){
                     if(oldVisitDTO.time.hour == visitDTO.time.hour){
                         val minuteDifference: Int = oldVisitDTO.time.minute - visitDTO.time.minute
-                        if (abs(minuteDifference)>=5) {
+                        if (abs(minuteDifference)<4) {
                             throw Exception("Change date or time!")
                         }
                     }

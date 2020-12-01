@@ -4,12 +4,16 @@ package clinicForRSQ.clinic.patient
 import clinicForRSQ.clinic.patient.dto.PatientDTO
 import clinicForRSQ.clinic.visit.VisitRepo
 import clinicForRSQ.clinic.visit.VisitService
+import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import org.springframework.data.repository.findByIdOrNull
+import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
 class PatientServiceTest {
@@ -119,7 +123,10 @@ class PatientServiceTest {
     @Test
     fun putPatientTestEmptyPatient(){
         //given
-        val emptyPatientDTO : PatientDTO = PatientDTO(0,"","","","") //dodac pacjenta o id=0
+        val emptyPatientDTO : PatientDTO = PatientDTO(2,"","","","")
+
+        whenever(patientRepo.existsById(2)).thenReturn(true)
+        //whenever(patientRepo.findByIdOrNull(2)).thenReturn(Patient(emptyPatientDTO))
         //when & then
         val exception = assertThrows(Exception::class.java) {
             patientService.tryPutPatient(emptyPatientDTO)

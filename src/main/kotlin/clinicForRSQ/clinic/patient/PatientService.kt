@@ -23,12 +23,14 @@ class PatientService(val repo : PatientRepo,
 
     fun tryPutPatient(patientDTO: PatientDTO): PatientDTO{
         if(repo.existsById(patientDTO.id)) {
-            var oldPatient: Patient? = Patient(0,"","","","")
-            oldPatient = repo.findByIdOrNull(patientDTO.id)
+            val oldPatient: Patient? = repo.findByIdOrNull(patientDTO.id)
             val newPatient: Patient = Patient(0,"","","","")
             if(oldPatient != null){
+                if(patientDTO.name == "" && patientDTO.surname == "" && patientDTO.address == "" && patientDTO.pesel == "")
+                    throw Exception("No data for editing!")
+
                 if(patientDTO.name == "")
-                newPatient.name = oldPatient.name
+                    newPatient.name = oldPatient.name
                 else{
                     newPatient.name = patientDTO.name
                 }
@@ -52,7 +54,7 @@ class PatientService(val repo : PatientRepo,
                 }
 
                 newPatient.id = patientDTO.id
-            return repo.save(newPatient).toPatientDTO()
+                return repo.save(newPatient).toPatientDTO()
             }
             else{
                 throw Exception("No data for editing!")
@@ -84,34 +86,19 @@ class PatientService(val repo : PatientRepo,
 
         if(pesel.length == 11){
             try{
-                val num = parseLong(pesel)
+                parseLong(pesel)
             }catch (e: NumberFormatException){
                 throw Exception("Letters in pesel!")
             }
             val controlNumbers : IntArray = intArrayOf(1,3,7,9,1,3,7,9,1,3,1)
             var controlNumber : Int = 0
-            for((index,value) in controlNumbers.withIndex()){
+            for((index) in controlNumbers.withIndex()){
                 controlNumber += Character.getNumericValue(pesel[index]) * controlNumbers[index]
             }
-            /*
-            val a : Int = Character.getNumericValue(pesel[0])
-            val b : Int = Character.getNumericValue(pesel[1])
-            val c : Int = Character.getNumericValue(pesel[2])
-            val d : Int = Character.getNumericValue(pesel[3])
-            val e : Int = Character.getNumericValue(pesel[4])
-            val f : Int = Character.getNumericValue(pesel[5])
-            val g : Int = Character.getNumericValue(pesel[6])
-            val h : Int = Character.getNumericValue(pesel[7])
-            val i : Int = Character.getNumericValue(pesel[8])
-            val j : Int = Character.getNumericValue(pesel[9])
-            val k : Int = Character.getNumericValue(pesel[10])
-
-            //(1·a + 3·b + 7·c + 9·d + 1·e + 3·f + 7·g + 9·h + 1·i + 3·j + 1·k)%10 == 0 -> pesel correct
-            val controlNumber : Int = 1*a + 3*b + 7*c + 9*d + 1*e + 3*f + 7*g + 9*h + 1*i + 3*j + 1*k */
             if(controlNumber < 9 || controlNumber%10 != 0)
                 throw Exception("Incorrect pesel!")
         }
         else
-        throw Exception("Incorrect lenght pesel!")
+        throw Exception("Incorrect pesel length!")
     }
 }
