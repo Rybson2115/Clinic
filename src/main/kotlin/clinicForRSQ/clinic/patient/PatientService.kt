@@ -14,7 +14,7 @@ class PatientService(val repo : PatientRepo,
 
     fun tryAddPatient(patientDTO: PatientDTO): PatientDTO {
         checkPesel(patientDTO.pesel)
-        checkValues(patientDTO)
+        //checkValues(patientDTO)
         val patient: Patient = Patient(patientDTO)
         return repo.save(patient).toPatientDTO()
     }
@@ -74,14 +74,14 @@ class PatientService(val repo : PatientRepo,
             throw Exception("Patient no exists!")
 
     }
-    fun checkValues(patient : PatientDTO){
-        if(patient.name == "" || patient.name.length < 3)
-            throw Exception("Name is empty or too short!")
-        if(patient.surname == "" || patient.surname.length < 3)
-            throw Exception("Surname is empty or too short!")
-        if(patient.address == "" || patient.address.length < 5)
-            throw Exception("Address is empty or too short!")
-    }
+//    fun checkValues(patient : PatientDTO){
+//        if(patient.name == "" || patient.name.length < 3)
+//            throw Exception("Name is empty or too short!")
+//        if(patient.surname == "" || patient.surname.length < 3)
+//            throw Exception("Surname is empty or too short!")
+//        if(patient.address == "" || patient.address.length < 5)
+//            throw Exception("Address is empty or too short!")
+//    }
     fun checkPesel(pesel : String){
 
         if(pesel.length == 11){

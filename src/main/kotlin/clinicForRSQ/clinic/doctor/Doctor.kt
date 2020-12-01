@@ -2,13 +2,14 @@ package clinicForRSQ.clinic.doctor
 
 import clinicForRSQ.clinic.doctor.dto.DoctorDTO
 import clinicForRSQ.clinic.doctor.dto.DoctorSpecializationDTO
+import com.sun.istack.NotNull
 import javax.persistence.*
 
 @Entity
 class Doctor (
         @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long,
-        var name: String,
-        var surname: String,
+        @NotNull var name: String,
+        @NotNull var surname: String,
         @Enumerated(EnumType.STRING) var specialization: DoctorSpecialization
 
 ){
