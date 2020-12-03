@@ -12,31 +12,8 @@ import java.time.LocalTime
 class VisitService (var repo : VisitRepo) {
 
     fun tryAddVisit(visitDTO: VisitDTO)  {
-        if (checkDateAndTime(visitDate = visitDTO.date, visitTime = visitDTO.time)) {
-            val doctorVisits: List<Visit> = repo.findDoctorVisitById(visitDTO.doctor.id).toList()
-            for(visit in doctorVisits){
-                val oldVisitDTO: VisitDTO = visit.toVisitDTO()
-                if(oldVisitDTO.date.isEqual(visitDTO.date)){
-                        if(oldVisitDTO.time.hour == visitDTO.time.hour){
-                            val minuteDifference: Int = oldVisitDTO.time.minute - visitDTO.time.minute
-                                if (abs(minuteDifference)<4) {
-                                    throw Exception("Change date or time!")
-                                }
-                        }
-                }
-            }
-            val patientVisits: List<Visit> = repo.findPatientVisitById(visitDTO.patient.id).toList()
-            for(visit in patientVisits){
-                val oldVisitDTO: VisitDTO = visit.toVisitDTO()
-                if(oldVisitDTO.date.isEqual(visitDTO.date)){
-                    if(oldVisitDTO.time.hour == visitDTO.time.hour){
-                        val minuteDifference: Int = oldVisitDTO.time.minute - visitDTO.time.minute
-                        if (abs(minuteDifference)<4) {
-                            throw Exception("Change date or time!")
-                        }
-                    }
-                }
-            }
+        if (checkDateAndTime(visitDate = visitDTO.date,
+                            visitTime = visitDTO.time)) {
             val visit : Visit = Visit(visitDTO)
             repo.save(visit).toVisitDTO()
         }

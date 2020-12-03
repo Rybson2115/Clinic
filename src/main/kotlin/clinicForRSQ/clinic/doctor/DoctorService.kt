@@ -21,7 +21,7 @@ class DoctorService (val repo : DoctorRepo, val visitService: VisitService){
             val oldDoctor: Doctor? = repo.findByIdOrNull(doctorDTO.id)
             val newDoctor: Doctor = Doctor(0,"","", DoctorSpecialization.DENTIST)
             if(oldDoctor != null){
-                if(doctorDTO.name == "" && doctorDTO.surname == "" && doctorDTO.specialization == null ) 
+                if(doctorDTO.name == "" && doctorDTO.surname == "" && doctorDTO.specialization == null )
                     throw Exception("No data for editing!")
 
                 if(doctorDTO.name == "")
@@ -51,7 +51,7 @@ class DoctorService (val repo : DoctorRepo, val visitService: VisitService){
         }
         else
             throw Exception("doctor no exists!")
-    }
+
     }
     fun tryDeleteDoctor(id: Long) {
         if(repo.existsById(id)){
